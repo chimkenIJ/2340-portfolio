@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Isha Jain — GT Movies Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0b0a;
+    --ink: #efe9dd;
+    --dim: #928c7e;
+    --accent: #b8bec4;
+    --rule: rgba(239,233,221,0.14);
+    --max: 760px;
+    --margin-col: 150px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Newsreader', serif;
+    font-size:18px;
+    line-height:1.7;
+    position:relative;
+    overflow-x:hidden;
+  }
+  #stars{ position:absolute; top:0; left:0; width:100%; z-index:0; pointer-events:none; }
+  #stars .s{ position:absolute; width:1px; height:1px; border-radius:50%; background:var(--ink); }
+  #stars .bright{ width:2.5px; height:2.5px; box-shadow:0 0 6px 1.5px rgba(239,233,221,0.6); }
+  #stars .glint{ animation:glint 6s ease-in-out infinite; }
+  @keyframes glint{ 0%,100%{opacity:0.2;} 50%{opacity:0.95;} }
+  @media (prefers-reduced-motion: reduce){ #stars .glint{ animation:none; opacity:0.55; } }
+  main{ position:relative; z-index:1; }
+
+  .kicker{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:12px;
+    letter-spacing:0.08em;
+    color:var(--dim);
+    text-transform:uppercase;
+  }
+  h1,h2,h3{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    margin:0;
+    line-height:1.08;
+  }
+  .fill{ color:var(--accent); }
+  a{ color:var(--accent); }
+
+  /* ---------- MASTHEAD ---------- */
+  .masthead{
+    max-width:1000px;
+    margin:0 auto;
+    padding:90px 32px 5px;
+    position:relative;
+  }
+  .masthead .northstar{
+    position:absolute;
+    top:90px; right:60px;
+    width:16px; height:32px;
+    opacity:0.9;
+  }
+  .horizon{
+    max-width:1000px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+  .horizon svg{ width:100%; height:70px; display:block; }
+  .horizon path{ fill:none; stroke:var(--rule); stroke-width:1; }
+  .masthead .kicker{ margin-bottom:22px; }
+  .masthead h1{
+    font-size:clamp(48px, 8vw, 92px);
+    letter-spacing:-0.01em;
+  }
+  .masthead .dek{
+    font-family:'Newsreader', serif;
+    font-style:italic;
+    font-size:20px;
+    color:var(--dim);
+    max-width:520px;
+    margin-top:22px;
+  }
+  .masthead .meta-row{
+    margin-top:44px;
+    display:flex;
+    gap:40px;
+    flex-wrap:wrap;
+    padding-top:24px;
+    border-top:1px solid var(--rule);
+    font-family:'Space Grotesk', sans-serif;
+    font-size:13px;
+  }
+  .masthead .meta-row div{ color:var(--dim); }
+  .masthead .meta-row span{ display:block; color:var(--ink); font-size:15px; margin-top:3px; font-family:'Newsreader', serif; }
+
+  /* ---------- SECTIONS: asymmetric margin-note layout ---------- */
+  section{
+    max-width:1000px;
+    margin:0 auto;
+    padding:96px 32px;
+    display:grid;
+    grid-template-columns:var(--margin-col) 1fr;
+    gap:40px;
+  }
+  section + section{ border-top:1px solid var(--rule); }
+  section .label{
+    padding-top:6px;
+  }
+  section .label .kicker{ margin-bottom:6px; }
+  section .label .sub{
+    color:var(--dim);
+    font-size:13px;
+    font-family:'Space Grotesk', sans-serif;
+  }
+  section .body{ max-width:600px; }
+  section h2{
+    font-size:clamp(28px, 4vw, 38px);
+    margin-bottom:26px;
+  }
+  section p{ color:var(--ink); margin:0 0 18px 0; }
+  section p:last-child{ margin-bottom:0; }
+
+  /* Feature index — definition-list style, no icons */
+  .index-list{ margin:30px 0 0; padding:0; }
+  .index-list .entry{
+    display:grid;
+    grid-template-columns:1fr;
+    padding:18px 0;
+    border-top:1px solid var(--rule);
+  }
+  .index-list .entry:last-child{ border-bottom:1px solid var(--rule); }
+  .index-list dt{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:16px;
+    color:var(--ink);
+    margin-bottom:6px;
+  }
+  .index-list dd{ margin:0; color:var(--dim); font-size:16px; }
+
+  /* Process — margin timeline, no dots/icons */
+  .process-list{ margin-top:8px; }
+  .process-list .row{
+    display:grid;
+    grid-template-columns:90px 1fr;
+    gap:20px;
+    padding:20px 0;
+    border-top:1px solid var(--rule);
+  }
+  .process-list .row:last-child{ padding-bottom:0; }
+  .process-list .phase{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:12px;
+    letter-spacing:0.06em;
+    color:var(--dim);
+    padding-top:4px;
+    text-transform:uppercase;
+  }
+  .process-list h3{
+    font-size:19px;
+    font-weight:500;
+    margin-bottom:6px;
+  }
+  .process-list p{ margin:0; }
+
+  /* Video */
+  .frame{
+    margin-top:8px;
+    border:1px solid var(--rule);
+    background:#000;
+    aspect-ratio:16/9;
+  }
+  .frame iframe{ width:100%; height:100%; border:0; display:block; }
+
+  footer{
+    max-width:1000px; margin:0 auto;
+    padding:60px 32px 80px;
+    border-top:1px solid var(--rule);
+    font-family:'Space Grotesk', sans-serif;
+    font-size:13px;
+    color:var(--dim);
+  }
+  footer a{ color:var(--accent); text-decoration:none; }
+  footer .name{ color:var(--ink); font-family:'Newsreader', serif; font-size:17px; margin-bottom:10px; }
+
+  @media (max-width:760px){
+    :root{ --margin-col: 1fr; }
+    section{ grid-template-columns:1fr; gap:16px; padding:64px 22px; }
+    .masthead{ padding:70px 22px 46px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="stars" aria-hidden="true"></div>
+
+<main>
+
+  <div class="masthead">
+    <svg class="northstar" viewBox="0 0 16 32">
+      <path d="M8 0 C8.6 12 10 14 16 16 C10 18 8.6 20 8 32 C7.4 20 6 18 0 16 C6 14 7.4 12 8 0 Z" fill="var(--accent)"/>
+    </svg>
+    <div class="kicker">Portfolio · <span class="fill">CS 2340 Section B</span></div>
+    <h1>GT Movies Store</h1>
+  </div>
+
+
+  <section id="intro">
+    <div class="label">
+      <div class="kicker">01</div>
+      <div class="sub">Me :)</div>
+    </div>
+    <div class="body">
+      <h2>Introduction</h2>
+      <p class="fill">Hi! I'm Isha Jain, a second year CS major! My threads are Devices & Intelligence, and I'm interested in hardware & mobile development. In the future, I want to work in embedded systems. Some other facts about me are that I'm from the Bay Area, and I love drawing in my free time!</p>
+    </div>
+  </section>
+
+  <section id="app">
+    <div class="label">
+      <div class="kicker">02</div>
+      <div class="sub">Web App!</div>
+    </div>
+    <div class="body">
+      <h2>Features & Functionality</h2>
+      <p class="fill">The GT Movie Store web app allows users to find & review movies, see what others think of it, and buy them!
+
+      <br><br>Firstly, the user can make an account to later purchase movies, and leave reviews for others to see. There's an about page to get them situated on the navbar, explaining the website. Next, they can see the list of movies currently offered by
+      the store. They can also search for specific ones, if they already know what they're looking for. After seeing a movie they like, the user can click into
+      it, to see the description, price, and reviews left by other users. If they're logged in, they can also leave (editable) reviews! There's also an option 
+      to report other reviews, removing it from the user's view, leaving it up to the admin to delete it from the website. Next, they can add the movie to their cart after choosing
+      the quantity. This automatically redirects them to the cart, where they can either purchase all the movies in the cart, or delete them. Finally, once the user orders their moveis, they 
+      can see their past orders in the orders tab. There's also an option to logout on the top right, in case they need to switch accounts.
+      </p>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="label">
+      <div class="kicker">03</div>
+      <div class="sub">Process</div>
+    </div>
+    <div class="body">
+      <h2>How I Worked On It</h2>
+     <p class="fill">I worked on this over the course of many days, so I didn't have to rush everything on one day. Since most of the project was just straight
+      from the textbook, there wasn't much planning or ideation I had to do this time. However, for the last user story, I referenced other parts of the project to make it. I also used
+      my past experience in Python to help me. There was one part I was confused about, and I looked on ed discussion for help (about how how MySQL wasn't working on PythonAnywhere), which answered
+      my question. 
+     </p>
+  </section>
+
+  <section id="video">
+    <div class="label">
+      <div class="kicker">04</div>
+      <div class="sub">Demo</div>
+    </div>
+    <div class="body">
+      <h2>Walkthrough</h2>
+      <p class="fill">This is my demo for GT Movie Store!</p>
+      <div class="frame">
+        <iframe src="https://www.youtube.com/embed/fTDEvIHs5SE" title="GT Movies Store" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<script>
+(function(){
+  var field = document.getElementById('stars');
+  var docHeight = document.body.scrollHeight;
+  field.style.height = docHeight + 'px';
+
+  var count = Math.round((window.innerWidth < 640 ? 0.13 : 0.08) * docHeight);
+  for (var i = 0; i < count; i++){
+    var s = document.createElement('div');
+    var isBright = Math.random() < 0.06;
+    var isGlint = isBright && Math.random() < 0.5;
+    s.className = 's' + (isBright ? ' bright' : '') + (isGlint ? ' glint' : '');
+    s.style.left = (Math.random() * 100) + '%';
+    s.style.top = (Math.random() * docHeight) + 'px';
+    s.style.opacity = isBright ? (Math.random() * 0.3 + 0.5).toFixed(2) : (Math.random() * 0.45 + 0.15).toFixed(2);
+    if (isGlint) s.style.animationDelay = (Math.random() * 6) + 's';
+    field.appendChild(s);
+  }
+})();
+</script>
+
+</body>
+</html>
